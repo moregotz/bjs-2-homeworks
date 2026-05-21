@@ -10,7 +10,6 @@ function validateCount(value) {
         return parseCount(value);
     } catch (error) {
         return error;
-        throw error;
     }
 }
 
@@ -20,22 +19,19 @@ class Triangle {
         this.sideB = b;
         this.sideC = c;
 
-        if ((this.sideA + this.sideB) < this.sideC || (this.sideA + this.sideC) < this.sideB || (this.sideB + this.sideC) < this.sideA) {
+        if ((a + b) < c || (a + c) < b || (b + c) < a) {
             throw new Error("Треугольник с такими сторонами не существует");
         }
     }
 
     get perimeter() {
-        this.trianglePerimeter = this.sideA + this.sideB + this.sideC;
-        return this.trianglePerimeter;
+        return this.sideA + this.sideB + this.sideC;
     }
 
     get area() {
-        this.triangleHalfPerimeter = this.trianglePerimeter / 2;
+        let halfPerimeter = this.perimeter / 2;
 
-        this.triangleArea = Number(Math.sqrt(this.triangleHalfPerimeter * (this.triangleHalfPerimeter - this.sideA) * (this.triangleHalfPerimeter - this.sideB) * (this.triangleHalfPerimeter - this.sideC)).toFixed(3));
-
-        return this.triangleArea;
+        return Number(Math.sqrt(halfPerimeter * (halfPerimeter - this.sideA) * (halfPerimeter - this.sideB) * (halfPerimeter - this.sideC)).toFixed(3));
     }
 }
 
